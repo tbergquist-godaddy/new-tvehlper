@@ -19,10 +19,10 @@ export default async function SearchResults({ query }: Props) {
               className="bg-gray-100 rounded-lg relative overflow-hidden min-h-96"
             >
               {show.image != null && (
-                <Image fill={true} src={show.image?.original} alt={show.name} />
+                <Image fill={true} src={show.image?.medium} alt={show.name} />
               )}
               <div className="absolute bottom-0 left-0 right-0 bg-gray-700 opacity-80 text-white p-4">
-                {show.name}
+                {[show.rating.average, show.name].filter(Boolean).join(": ")}
               </div>
             </div>
           ))}

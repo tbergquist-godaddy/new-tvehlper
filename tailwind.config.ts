@@ -16,6 +16,12 @@ const config: Config = {
       gridTemplateColumns: {
         fit: "repeat(auto-fit, minmax(250px, 1fr))",
       },
+      borderStyle: {
+        inset: "inset",
+      },
+      boxShadow: {
+        lol: "inset 0 0 0 2px",
+      },
     },
   },
   plugins: [],

@@ -6,7 +6,10 @@ const searchSchema = z.array(
     show: z.object({
       id: z.number(),
       name: z.string(),
-      summary: z.string(),
+      summary: z.string().nullable(),
+      rating: z.object({
+        average: z.number().nullable(),
+      }),
       image: z
         .object({
           medium: z.string(),
