@@ -1,6 +1,8 @@
-import { Section } from '@/app/components/page-layout';
-import fetchTvShow from './api/fetch-tv-show';
 import Image from 'next/image';
+
+import fetchTvShow from './api/fetch-tv-show';
+
+import { Section } from '@/app/components/page-layout';
 
 type Props = {
   id: string;

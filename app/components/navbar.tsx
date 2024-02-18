@@ -1,4 +1,5 @@
 import Link from 'next/link';
+
 import Container from './container';
 
 export default function Navbar() {
