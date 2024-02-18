@@ -11,14 +11,12 @@ export default function Home({
 }) {
   const parsedQuery = Array.isArray(query) ? query[0] : query;
   return (
-    <main>
-      <PageContainer>
-        <h1 className="text-3xl font-bold">Search tv shows</h1>
-        <SearchForm query={parsedQuery} />
-        <Suspense fallback={<SearchContentLoader />}>
-          <SearchResults query={parsedQuery} />
-        </Suspense>
-      </PageContainer>
-    </main>
+    <PageContainer>
+      <h1 className="text-3xl font-bold">Search tv shows</h1>
+      <SearchForm query={parsedQuery} />
+      <Suspense fallback={<SearchContentLoader />}>
+        <SearchResults query={parsedQuery} />
+      </Suspense>
+    </PageContainer>
   );
 }
