@@ -1,4 +1,4 @@
-import * as z from "zod";
+import * as z from 'zod';
 
 const searchSchema = z.array(
   z.object({
@@ -17,16 +17,14 @@ const searchSchema = z.array(
         })
         .nullable(),
     }),
-  })
+  }),
 );
 
 export default async function searchTvShow(query: Maybe<string>) {
   if (query == null) {
     return null;
   }
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_TV_MAZE_URL}/search/shows?q=${query}`
-  );
+  const response = await fetch(`${process.env.NEXT_PUBLIC_TV_MAZE_URL}/search/shows?q=${query}`);
   const shows = await response.json();
   return searchSchema.parse(shows);
 }
