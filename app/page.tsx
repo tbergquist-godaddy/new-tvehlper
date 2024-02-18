@@ -2,6 +2,7 @@ import { Suspense } from 'react';
 import SearchResults from './search/search-results';
 import { PageContainer } from './components/page-layout';
 import SearchForm from './search/search-form';
+import SearchContentLoader from './search/search-content-loader';
 
 export default function Home({
   searchParams: { query },
@@ -14,7 +15,7 @@ export default function Home({
       <PageContainer>
         <h1 className="text-3xl font-bold">Search tv shows</h1>
         <SearchForm query={parsedQuery} />
-        <Suspense fallback="loading...">
+        <Suspense fallback={<SearchContentLoader />}>
           <SearchResults query={parsedQuery} />
         </Suspense>
       </PageContainer>
