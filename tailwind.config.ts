@@ -20,7 +20,7 @@ const config: Config = {
         inset: "inset",
       },
       boxShadow: {
-        lol: "inset 0 0 0 2px",
+        "input-focus": "inset 0 0 0 2px",
       },
     },
   },
