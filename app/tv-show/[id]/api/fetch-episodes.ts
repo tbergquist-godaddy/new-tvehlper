@@ -21,8 +21,6 @@ const episodesSchema = z.array(
   }),
 );
 
-export type Episodes = z.infer<typeof episodesSchema>;
-
 export default async function fetchEpisodes(tvshowId: string) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_TV_MAZE_URL}/shows/${tvshowId}/episodes`);
 
