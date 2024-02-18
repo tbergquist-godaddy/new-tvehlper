@@ -18,10 +18,10 @@ export default async function TvShow({ id }: Props) {
         <div className="flex flex-col gap-4 md:flex-row">
           {show.image != null && (
             <Image
-              className="rounded-lg"
               height={300}
               width={300}
-              src={show.image?.original}
+              className="rounded-lg"
+              src={show.image?.medium}
               alt={show.name}
             />
           )}
