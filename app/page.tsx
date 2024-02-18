@@ -1,7 +1,7 @@
-import { Suspense } from "react";
-import SearchResults from "./search/search-results";
-import { PageContainer } from "./components/page-layout";
-import SearchForm from "./search/search-form";
+import { Suspense } from 'react';
+import SearchResults from './search/search-results';
+import { PageContainer } from './components/page-layout';
+import SearchForm from './search/search-form';
 
 export default function Home({
   searchParams: { query },
