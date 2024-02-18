@@ -23,7 +23,7 @@ export default function TextInput({
       <input
         type={type}
         className={cn(
-          "h-14 rounded-lg border border-slate-200 border-solid px-3 w-full outline-none focus:shadow-lol focus:shadow-blue-600",
+          "h-14 rounded-lg border border-slate-200 border-solid px-3 w-full outline-none focus:shadow-input-focus focus:shadow-blue-600",
           className
         )}
         id={inputId}
