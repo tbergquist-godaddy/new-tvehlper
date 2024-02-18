@@ -1,7 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import searchTvShow from './api/search-tv-shows';
-import Link from 'next/link';
 
 type Props = {
   query: string | undefined;
