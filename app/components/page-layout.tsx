@@ -1,7 +1,12 @@
 import { PropsWithChildren } from 'react';
+import cn from 'classnames';
 
-export const PageContainer = ({ children }: PropsWithChildren) => {
-  return <div className="flex flex-col gap-10">{children}</div>;
+type Props = {
+  className?: string;
+};
+
+export const PageContainer = ({ children, className }: PropsWithChildren<Props>) => {
+  return <div className={cn('flex flex-col gap-10', className)}>{children}</div>;
 };
 
 export const Section = ({ children }: PropsWithChildren) => {

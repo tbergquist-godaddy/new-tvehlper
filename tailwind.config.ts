@@ -21,6 +21,9 @@ const config: Config = {
       boxShadow: {
         'input-focus': 'inset 0 0 0 2px',
       },
+      maxWidth: {
+        center: 'clamp(500px, 75%, 600px)',
+      },
     },
   },
   plugins: [],
