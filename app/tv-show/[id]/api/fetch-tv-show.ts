@@ -20,6 +20,9 @@ const tvShowSchema = z.object({
 
 export default async function fetchTvShow(id: string) {
   const response = await fetch(`${process.env.NEXT_PUBLIC_TV_MAZE_URL}/shows/${id}`);
+  if (!response.ok) {
+    return null;
+  }
   const data = await response.json();
   return tvShowSchema.parse(data);
 }

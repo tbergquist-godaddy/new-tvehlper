@@ -10,25 +10,31 @@ export default async function FavoritesList() {
   }
   return (
     <ul className="overflow-hidden">
-      {favorites.map((favorite) => (
-        <Link href={`/tv-show/${favorite.id}`} key={favorite.id}>
-          <li className="flex border-b -mb-1 mt-1 px-6 py-4 items-center">
-            {favorite.image != null && (
-              <div className="rounded-full h-12 w-12 absolute">
-                <Image
-                  fill={true}
-                  src={favorite.image.medium}
-                  alt={favorite.name}
-                  className="rounded-full"
-                />
+      {favorites.map((favorite) => {
+        if (favorite == null) {
+          // TODO: Show that we didn't fetch all
+          return null;
+        }
+        return (
+          <Link href={`/tv-show/${favorite.id}`} key={favorite.id}>
+            <li className="flex border-b -mb-1 mt-1 px-6 py-4 items-center">
+              {favorite.image != null && (
+                <div className="rounded-full h-12 w-12 absolute">
+                  <Image
+                    fill={true}
+                    src={favorite.image.medium}
+                    alt={favorite.name}
+                    className="rounded-full"
+                  />
+                </div>
+              )}
+              <div className="pl-14">
+                <p className="text-lg font-bold">{favorite.name}</p>
               </div>
-            )}
-            <div className="pl-14">
-              <p className="text-lg font-bold">{favorite.name}</p>
-            </div>
-          </li>
-        </Link>
-      ))}
+            </li>
+          </Link>
+        );
+      })}
     </ul>
   );
 }

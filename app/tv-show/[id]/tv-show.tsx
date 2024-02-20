@@ -10,7 +10,9 @@ type Props = {
 
 export default async function TvShow({ id }: Props) {
   const show = await fetchTvShow(id);
-
+  if (show == null) {
+    return <div>Failed to load the show</div>;
+  }
   return (
     <>
       <h1 className="text-3xl font-bold">{show.name}</h1>

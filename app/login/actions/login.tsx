@@ -41,6 +41,4 @@ export default async function login(formData: FormData) {
     httpOnly: true,
     sameSite: 'strict',
   });
-
-  redirect('/favorites');
 }

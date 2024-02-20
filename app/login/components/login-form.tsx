@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import login from '../actions/login';
 
@@ -10,6 +11,7 @@ import TextInput from '@/app/components/text-input';
 
 export default function LoginForm() {
   // TODO: Formik
+  const router = useRouter();
   const [usernameError, setUserNameError] = useState<boolean | string>(false);
   const [passwordError, setPasswordError] = useState<boolean | string>(false);
   const [loginError, setLoginError] = useState('');
@@ -23,6 +25,10 @@ export default function LoginForm() {
           setLoginError('');
           setLoading(true);
           const val = await login(formData);
+          if (val === undefined) {
+            // login success
+            return router.push('/favorites');
+          }
           const containsField = (field: string) => {
             for (const error of val) {
               if (typeof error !== 'string' && error.path.includes(field)) {
