@@ -1,5 +1,5 @@
 import { Schema, ObjectId } from 'mongoose';
-import { verify, generate } from 'password-hash';
+import { verify } from 'password-hash';
 
 import tvHelperConnection from '../connection';
 
@@ -40,6 +40,10 @@ export async function verifyPassword(username: string, password: string): Promis
     return null;
   }
   return verify(password, user.password) ? user : null;
+}
+
+export function getUserById(id: string): Promise<Maybe<IUser>> {
+  return UserModel.findById(id).select('-password').exec();
 }
 
 export default UserModel;
