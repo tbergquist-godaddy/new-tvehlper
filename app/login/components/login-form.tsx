@@ -49,8 +49,8 @@ export default function LoginForm() {
           <TextInput name="username" label="Username" error={usernameError} />
           <TextInput name="password" label="Password" type="password" error={passwordError} />
           {loginError != null && <p className="text-red-600">{loginError}</p>}
-          <Button disabled={loading} type="submit">
-            {loading ? 'loading...' : 'Login'}
+          <Button isLoading={loading} type="submit">
+            Login
           </Button>
         </Section>
       </form>
