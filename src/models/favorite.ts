@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
 
 import tvHelperConnection from '../connection';
+import { getLoggedInUserId } from '../services/get-id-from-cookie';
 
 import fetchTvShow from '@/app/tv-show/[id]/api/fetch-tv-show';
 
@@ -18,6 +19,7 @@ const favoritesSchema = new Schema<IFavorite>({
   },
   serieId: {
     type: Number,
+    required: true,
   },
 });
 
@@ -37,5 +39,29 @@ export async function getFavoritesByUserId(userId: string) {
   }
   return Promise.all(promises);
 }
+
+export async function isFavorite(serieId: number) {
+  const userId = await getLoggedInUserId();
+  if (userId == null) {
+    return null;
+  }
+  return (await FavoriteModel.exists({ userId, serieId })) != null;
+}
+
+export const addFavorite = async (serieId: number) => {
+  const userId = await getLoggedInUserId();
+  if (userId == null || serieId == null) {
+    return null;
+  }
+  return (await FavoriteModel.create({ userId, serieId })).toObject();
+};
+
+export const removeFavorite = async (serieId: number) => {
+  const userId = await getLoggedInUserId();
+  if (userId == null || serieId == null) {
+    return null;
+  }
+  return await FavoriteModel.deleteOne({ userId, serieId });
+};
 
 export default FavoriteModel;
