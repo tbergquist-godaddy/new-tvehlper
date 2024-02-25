@@ -2,8 +2,8 @@ import { Suspense } from 'react';
 
 import TvShow from './tv-show';
 import TvShowContentLoader from './tv-show-content-loader';
-import EpisodesList from './episodes-list';
-import EpisodesContentLoader from './episodes-content-loader';
+import EpisodesList from './episode/episodes-list';
+import EpisodesContentLoader from './episode/episodes-content-loader';
 
 import { PageContainer } from '@/app/components/page-layout';
 
