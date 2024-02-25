@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, Key } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import cn from 'classnames';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 

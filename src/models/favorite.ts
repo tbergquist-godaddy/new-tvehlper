@@ -12,7 +12,7 @@ export interface IFavorite {
 }
 
 const favoritesSchema = new Schema<IFavorite>({
-  // @ts-ignore: Fix later, this works
+  // @ts-expect-error: this works
   userId: {
     type: Schema.Types.ObjectId,
     ref: 'users',
@@ -26,6 +26,7 @@ const favoritesSchema = new Schema<IFavorite>({
 favoritesSchema.index({ userId: 1, serieId: -1 }, { unique: true });
 favoritesSchema.set('toObject', { getters: true });
 favoritesSchema.path('userId').get(function (value: Schema.Types.ObjectId) {
+  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   return value.toString();
 });
 
@@ -41,7 +42,7 @@ export async function getFavoritesByUserId(userId: string) {
 }
 
 export async function isFavorite(serieId: number) {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null) {
     return null;
   }
@@ -49,7 +50,7 @@ export async function isFavorite(serieId: number) {
 }
 
 export const addFavorite = async (serieId: number) => {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null || serieId == null) {
     return null;
   }
@@ -57,7 +58,7 @@ export const addFavorite = async (serieId: number) => {
 };
 
 export const removeFavorite = async (serieId: number) => {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null || serieId == null) {
     return null;
   }

@@ -35,6 +35,5 @@ export default async function fetchTvShow(id: string) {
   if (!response.ok) {
     return null;
   }
-  const data = await response.json();
-  return tvShowSchema.parse(data);
+  return tvShowSchema.parse(await response.json());
 }

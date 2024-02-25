@@ -1,5 +1,4 @@
 import Button from '../components/button';
-import { Section } from '../components/page-layout';
 import TextInput from '../components/text-input';
 
 export default function SearchForm({ query }: { query: Maybe<string> }) {

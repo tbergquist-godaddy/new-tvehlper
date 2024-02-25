@@ -5,8 +5,8 @@ import LogoutLink from './logout-link';
 
 import { getLoggedInUserId } from '@/src/services/get-id-from-cookie';
 
-export default async function Navbar() {
-  const userId = await getLoggedInUserId();
+export default function Navbar() {
+  const userId = getLoggedInUserId();
   const isLoggedIn = userId != null;
   return (
     <nav className="bg-blue-600 text-white">
