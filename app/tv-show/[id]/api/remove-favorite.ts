@@ -6,5 +6,5 @@ import { removeFavorite } from '@/src/models/favorite';
 
 export default async function deleteFavorite(serieId: number) {
   await removeFavorite(serieId);
-  revalidatePath('/tv-show/[id]');
+  revalidatePath('/tv-show/[id]', 'page');
 }
