@@ -16,6 +16,18 @@ const tvShowSchema = z.object({
     .string()
     .nullable()
     .transform((summary) => (summary == null ? null : striptags(summary))),
+  _links: z.object({
+    previousepisode: z
+      .object({
+        href: z.string(),
+      })
+      .optional(),
+    nextepisode: z
+      .object({
+        href: z.string(),
+      })
+      .optional(),
+  }),
 });
 
 export default async function fetchTvShow(id: string) {
