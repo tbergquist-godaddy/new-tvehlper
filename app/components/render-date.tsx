@@ -4,7 +4,7 @@ type Props = {
   date: string;
 };
 
-export default async function RenderDate({ date }: Props) {
+export default function RenderDate({ date }: Props) {
   const language = getAcceptLanguage();
   return new Intl.DateTimeFormat(language).format(new Date(date));
 }

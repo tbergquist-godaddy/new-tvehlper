@@ -7,7 +7,6 @@ import WatchedLoader from './watched-loader';
 
 import { Section } from '@/app/components/page-layout';
 import { getLoggedInUserId } from '@/src/services/get-id-from-cookie';
-import getAcceptLanguage from '@/src/services/get-language';
 import RenderDate from '@/app/components/render-date';
 
 type Props = {

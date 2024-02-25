@@ -1,11 +1,10 @@
 'use server';
 
 import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import * as z from 'zod';
 import jwt from 'jsonwebtoken';
 
-import UserModel, { IUser, verifyPassword } from '@/src/models/user';
+import { IUser, verifyPassword } from '@/src/models/user';
 
 const loginSchema = z.object({
   username: z.string().min(1),

@@ -1,6 +1,4 @@
 import Image from 'next/image';
-import { MdOutlineFavorite } from 'react-icons/md';
-import { Suspense } from 'react';
 
 import fetchTvShow from './api/fetch-tv-show';
 import ToggleFavorite from './toggle-favorite';

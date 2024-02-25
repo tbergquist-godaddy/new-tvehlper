@@ -1,8 +1,5 @@
-import { FaRegEyeSlash, FaRegEye } from 'react-icons/fa';
-
 import ToggleWatched from './toggle-watched';
 
-import Button from '@/app/components/button';
 import { isWatched } from '@/src/models/watched-episode';
 
 type Props = {

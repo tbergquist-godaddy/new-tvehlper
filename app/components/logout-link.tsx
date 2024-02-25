@@ -13,8 +13,8 @@ export default function LogoutLink() {
   return (
     <form
       method="POST"
-      action={async () => {
-        await logOut();
+      action={() => {
+        logOut();
         const url = new URL(window.location.href);
         if (url.pathname !== '/') {
           router.push('/');

@@ -25,6 +25,5 @@ export default async function searchTvShow(query: Maybe<string>) {
     return null;
   }
   const response = await fetch(`${process.env.NEXT_PUBLIC_TV_MAZE_URL}/search/shows?q=${query}`);
-  const shows = await response.json();
-  return searchSchema.parse(shows);
+  return searchSchema.parse(await response.json());
 }

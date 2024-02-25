@@ -29,6 +29,7 @@ const userSchema = new Schema<IUser>({
 });
 
 userSchema.virtual('id').get(function (this: IUser): string {
+  // eslint-disable-next-line @typescript-eslint/no-base-to-string
   return this._id.toString();
 });
 userSchema.set('toObject', { virtuals: true });

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-base-to-string */
 import { Schema, ObjectId } from 'mongoose';
 
 import tvHelperConnection from '../connection';
@@ -13,7 +14,7 @@ export interface IWatchedEpisode {
 
 const WatchedEpisodesSchema = new Schema<IWatchedEpisode>(
   {
-    // @ts-ignore: Fix later, this works
+    // @ts-expect-error: this works
     userId: {
       type: Schema.Types.ObjectId,
       ref: 'users',
@@ -46,7 +47,7 @@ const WatchedEpisode = tvHelperConnection.model<IWatchedEpisode>(
 );
 
 export async function isWatched(episodeId: number) {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null) {
     return null;
   }
@@ -54,7 +55,7 @@ export async function isWatched(episodeId: number) {
 }
 
 export async function markAsWatched(episodeId: number) {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null) {
     return null;
   }
@@ -62,7 +63,7 @@ export async function markAsWatched(episodeId: number) {
 }
 
 export async function markAsUnwatched(episodeId: number) {
-  const userId = await getLoggedInUserId();
+  const userId = getLoggedInUserId();
   if (userId == null) {
     return null;
   }
