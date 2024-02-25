@@ -8,6 +8,7 @@ import WatchedLoader from './watched-loader';
 import { Section } from '@/app/components/page-layout';
 import { getLoggedInUserId } from '@/src/services/get-id-from-cookie';
 import getAcceptLanguage from '@/src/services/get-language';
+import RenderDate from '@/app/components/render-date';
 
 type Props = {
   tvShowId: string;
@@ -41,9 +42,7 @@ export default async function EpisodesList({ tvShowId }: Props) {
               </p>
               <p>
                 Airdate:{' '}
-                {episode.airdate != null
-                  ? new Intl.DateTimeFormat(getAcceptLanguage()).format(new Date(episode.airdate))
-                  : 'Unknown'}
+                {episode.airdate != null ? <RenderDate date={episode.airdate} /> : 'Unknown'}
               </p>
             </div>
             {userId != null && (
