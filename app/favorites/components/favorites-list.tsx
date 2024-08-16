@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 
 import getFavorites from '../api/get-favorites';
 import EpisodeAirdate from './episode-airdate';
+import EpisodeAirdateLoader from './episode-airdate-loader';
 
 export default async function FavoritesList() {
   const favorites = await getFavorites();
@@ -56,7 +57,7 @@ export default async function FavoritesList() {
               </div>
               <div className="flex-1">
                 {favorite._links.previousepisode?.href != null && (
-                  <Suspense fallback={null}>
+                  <Suspense fallback={<EpisodeAirdateLoader />}>
                     <EpisodeAirdate href={favorite._links.previousepisode?.href} />
                   </Suspense>
                 )}
