@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useOptimistic } from 'react';
 import { useRouter } from 'next/navigation';
 
 import login from '../actions/login';
@@ -9,13 +9,27 @@ import Button from '@/app/components/button';
 import { Section } from '@/app/components/page-layout';
 import TextInput from '@/app/components/text-input';
 
+type OptimisticData = {
+  isLoading: boolean;
+  buttonText: string;
+};
+
 export default function LoginForm() {
   // TODO: Formik
   const router = useRouter();
   const [usernameError, setUserNameError] = useState<boolean | string>(false);
   const [passwordError, setPasswordError] = useState<boolean | string>(false);
   const [loginError, setLoginError] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [{ isLoading, buttonText }, setIsLoading] = useOptimistic<OptimisticData, boolean>(
+    { isLoading: false, buttonText: 'Login' },
+    (_, optimisticValue) => {
+      return {
+        isLoading: optimisticValue,
+        buttonText: optimisticValue ? '...Logging you in' : 'Login',
+      };
+    },
+  );
+
   return (
     <>
       <form
@@ -23,7 +37,7 @@ export default function LoginForm() {
           setUserNameError(false);
           setPasswordError(false);
           setLoginError('');
-          setLoading(true);
+          setIsLoading(true);
           const val = await login(formData);
           if (val === undefined) {
             // login success
@@ -42,15 +56,15 @@ export default function LoginForm() {
           if (typeof val === 'string') {
             setLoginError('Incorrect username or password');
           }
-          setLoading(false);
+          setIsLoading(false);
         }}
       >
         <Section>
           <TextInput name="username" label="Username" error={usernameError} />
           <TextInput name="password" label="Password" type="password" error={passwordError} />
           {loginError != null && <p className="text-red-600">{loginError}</p>}
-          <Button isLoading={loading} type="submit">
-            Login
+          <Button isLoading={isLoading} type="submit">
+            {buttonText}
           </Button>
         </Section>
       </form>

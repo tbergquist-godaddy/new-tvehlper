@@ -17,22 +17,28 @@ export default function TextInput({ type = 'text', className, label, id, error, 
       <label className="text-bold" htmlFor={inputId}>
         {label}
       </label>
-      <input
-        type={type}
-        className={cn(
-          'h-14 rounded-lg border border-slate-200 border-solid px-3 w-full outline-none focus:shadow-input-focus focus:shadow-blue-600',
-          className,
+      <div className="flex  flex-col gap-1">
+        <input
+          type={type}
+          className={cn(
+            {
+              'border-red-600': hasError,
+            },
+            'h-14 rounded-lg border border-slate-200 border-solid px-3 w-full outline-none focus:shadow-input-focus focus:shadow-blue-600',
+
+            className,
+          )}
+          id={inputId}
+          {...rest}
+          aria-describedby={hasError ? `${inputId}-error` : undefined}
+          aria-invalid={hasError}
+        />
+        {hasError && (
+          <div id={`${inputId}-error`} className="text-red-600">
+            {error}
+          </div>
         )}
-        id={inputId}
-        {...rest}
-        aria-describedby={hasError ? `${inputId}-error` : undefined}
-        aria-invalid={hasError}
-      />
-      {hasError && (
-        <div id={`${inputId}-error`} className="text-red-600">
-          {error}
-        </div>
-      )}
+      </div>
     </Lockup>
   );
 }

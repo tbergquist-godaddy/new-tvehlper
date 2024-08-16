@@ -41,7 +41,10 @@ export default function Button({
       )}
       {...rest}
     >
-      {isLoading ? <AiOutlineLoading3Quarters className="animate-spin" /> : children}
+      <div className={cn('flex', 'items-center', 'justify-start')}>
+        {isLoading && <AiOutlineLoading3Quarters className="animate-spin" />}
+        <div className="flex-1">{children}</div>
+      </div>
     </button>
   );
 }
