@@ -1,71 +1,39 @@
 'use client';
 
-import { useState, useOptimistic } from 'react';
-import { useRouter } from 'next/navigation';
+import { useFormStatus, useFormState } from 'react-dom';
 
 import login from '../actions/login';
+import { initialState } from '../login-form';
 
 import Button from '@/app/components/button';
 import { Section } from '@/app/components/page-layout';
 import TextInput from '@/app/components/text-input';
 
-type OptimisticData = {
-  isLoading: boolean;
-  buttonText: string;
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+  return (
+    <Button isLoading={pending} type="submit">
+      {pending ? '...Logging you in' : 'Login'}
+    </Button>
+  );
 };
 
 export default function LoginForm() {
-  // TODO: Formik
-  const router = useRouter();
-  const [usernameError, setUserNameError] = useState<boolean | string>(false);
-  const [passwordError, setPasswordError] = useState<boolean | string>(false);
-  const [loginError, setLoginError] = useState('');
-  const [{ isLoading, buttonText }, setIsLoading] = useOptimistic<OptimisticData, boolean>(
-    { isLoading: false, buttonText: 'Login' },
-    (_, optimisticValue) => {
-      return {
-        isLoading: optimisticValue,
-        buttonText: optimisticValue ? '...Logging you in' : 'Login',
-      };
-    },
-  );
-
+  const [state, action] = useFormState(login, initialState);
+  const loginError = state.form;
   return (
     <>
-      <form
-        action={async (formData) => {
-          setUserNameError(false);
-          setPasswordError(false);
-          setLoginError('');
-          setIsLoading(true);
-          const val = await login(formData);
-          if (val === undefined) {
-            // login success
-            return router.push('/favorites');
-          }
-          const containsField = (field: string) => {
-            for (const error of val) {
-              if (typeof error !== 'string' && error.path.includes(field)) {
-                return true;
-              }
-            }
-            return false;
-          };
-          setUserNameError(containsField('username') && 'This field is required');
-          setPasswordError(containsField('password') && 'This field is required');
-          if (typeof val === 'string') {
-            setLoginError('Incorrect username or password');
-          }
-          setIsLoading(false);
-        }}
-      >
+      <form action={action}>
         <Section>
-          <TextInput name="username" label="Username" error={usernameError} />
-          <TextInput name="password" label="Password" type="password" error={passwordError} />
+          <TextInput name="username" label="Username" error={state.fields.username} />
+          <TextInput
+            name="password"
+            label="Password"
+            type="password"
+            error={state.fields.password}
+          />
           {loginError != null && <p className="text-red-600">{loginError}</p>}
-          <Button isLoading={isLoading} type="submit">
-            {buttonText}
-          </Button>
+          <SubmitButton />
         </Section>
       </form>
     </>
