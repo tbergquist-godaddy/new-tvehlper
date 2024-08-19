@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, ReactNode, useId } from 'react';
 import cn from 'classnames';
 
-import { Lockup } from './page-layout';
+import { Lockup, Condensed } from './page-layout';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -17,7 +17,7 @@ export default function TextInput({ type = 'text', className, label, id, error, 
       <label className="text-bold" htmlFor={inputId}>
         {label}
       </label>
-      <div className="flex  flex-col gap-1">
+      <Condensed>
         <input
           type={type}
           className={cn(
@@ -38,7 +38,7 @@ export default function TextInput({ type = 'text', className, label, id, error, 
             {error}
           </div>
         )}
-      </div>
+      </Condensed>
     </Lockup>
   );
 }
