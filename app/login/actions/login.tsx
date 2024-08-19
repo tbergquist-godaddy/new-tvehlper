@@ -30,7 +30,7 @@ export default async function login(_: unknown, formData: FormData): Promise<Log
   if ('error' in parsedData) {
     return {
       ...initialState,
-      fields: errorToErrorMap(parsedData.error.issues, initialState.fields),
+      fields: errorToErrorMap(parsedData.error?.issues, initialState.fields),
     };
   }
 
